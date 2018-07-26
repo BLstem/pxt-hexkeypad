@@ -1,0 +1,14 @@
+{
+    "name": "Driver of 4x4 keypad  for micro:bit",
+    "version": "0.0.1",
+    "description": "4x4 Keypad",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*"
+    },
+    "files": [
+        "README.md",
+        "main.ts"
+    ],
+    "public": true
+}
