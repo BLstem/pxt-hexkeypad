@@ -1,5 +1,5 @@
 {
-    "name": "Driver of 4x4 keypad  for micro:bit",
+    "name": "keypad",
     "version": "0.0.1",
     "description": "4x4 Keypad",
     "license": "MIT",
