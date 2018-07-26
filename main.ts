@@ -1,8 +1,9 @@
-//%color=#DF0174 icon="\uf11c" block="4x4 Key Pad"
+//%color=#DF0174 icon="\uf11c" block="KeyPad"
 namespace keypad {
     let x = 0
     let y = 0
     let padnumber = [["1", "2", "3", "A"], ["4", "5", "6", "B"], ["7", "8", "9", "C"], ["*", "0", "#", "D"]]
+    let matrix: number[]
 
     /** This block has to be under "forever" loop. 
      *  
@@ -19,32 +20,7 @@ namespace keypad {
     //%col3.fieldEditor="gridpicker" col3.fieldOptions.columns=5 col3.defl=DigitalPin.P15
     //%col4.fieldEditor="gridpicker" col4.fieldOptions.columns=5 col4.defl=DigitalPin.P16
     export function initialize(row1: DigitalPin, row2: DigitalPin, row3: DigitalPin, row4: DigitalPin, col1: DigitalPin, col2: DigitalPin, col3: DigitalPin, col4: DigitalPin): void {
-        if (pins.digitalReadPin(row1) == 1) {
-            x = 1
-        }
-        else if (pins.digitalReadPin(row2) == 1) {
-            x = 2
-        }
-        else if (pins.digitalReadPin(row3) == 1) {
-            x = 3
-        }
-        else if (pins.digitalReadPin(row4) == 1) {
-            x = 4
-        }
-        else { x = 0 }
-        if (pins.digitalReadPin(col1) == 1) {
-            y = 1
-        }
-        else if (pins.digitalReadPin(col2) == 1) {
-            y = 2
-        }
-        else if (pins.digitalReadPin(col3) == 1) {
-            y = 3
-        }
-        else if (pins.digitalReadPin(col4) == 1) {
-            y = 4
-        }
-        else { y = 0 }
+        matrix = [row1, row2, row3, row4, col1, col2, col3, col4]
     }
 
     /** Read what you have just pressed and return a string.  
@@ -53,6 +29,17 @@ namespace keypad {
     //%block="reading"
     //%blockId="reading_from_the_pad"
     export function reading(): string {
+        x = 0; y = 0
+        for (let i = 0; i < 4; i++) {
+            if (pins.digitalReadPin(matrix[i]) == 1) {
+                x = i + 1
+            }
+        }
+        for (let i = 4; i < 8; i++) {
+            if (pins.digitalReadPin(matrix[i]) == 1) {
+                y = i - 3
+            }
+        }
         if (x != 0 && y != 0) {
             return padnumber[x - 1][y - 1]
         }
