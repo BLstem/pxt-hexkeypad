@@ -13,6 +13,7 @@ namespace keypad {
     //%block="Initialize row 1 %row1|row 2 %row2|row 3 %row3|row 4 %row4|col 1 %col1|col 2 %col2|col 3 %col3|col 4 %col4"
     //%blockId=initialize_key_pad
     //%blockExternalInputs=true
+    //%weight=100
     //%row1.fieldEditor="gridpicker" row1.fieldOptions.columns=5 row1.defl=DigitalPin.P1
     //%row2.fieldEditor="gridpicker" row2.fieldOptions.columns=5 row2.defl=DigitalPin.P2
     //%row3.fieldEditor="gridpicker" row3.fieldOptions.columns=5 row3.defl=DigitalPin.P8
@@ -36,10 +37,8 @@ namespace keypad {
             if (pins.digitalReadPin(matrix[i]) == 1) {
                 x = i + 1
             }
-        }
-        for (let i = 4; i < 8; i++) {
-            if (pins.digitalReadPin(matrix[i]) == 1) {
-                y = i - 3
+            if (pins.digitalReadPin(matrix[i + 4]) == 1) {
+                y = i + 1
             }
         }
         if (x != 0 && y != 0) {
