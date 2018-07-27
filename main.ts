@@ -37,17 +37,18 @@ namespace keypad {
     //%block="reading"
     //%blockId="reading_from_the_pad"
     export function reading(): string {
-        let x = 0; let y = 0
+        let x = -1; let y = -1
         for (let i = 0; i < 4; i++) {
             pins.digitalWritePin(matrix[i], 0)
-            x = i
             for (let j = 4; j < 8; j++) {
                 if (pins.digitalReadPin(matrix[j]) == 0) {
+                    x = i
                     y = j - 4
                 }
             }
+            pins.digitalWritePin(matrix[i], 1)
         }
-        if (x != 0 && y != 0) {
+        if (x != -1 && y != -1) {
             return padnumber[x][y]
         }
         else { return "" }
