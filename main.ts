@@ -1,7 +1,5 @@
 //%color=#DF0174 icon="\uf11c" block="KeyPad"
 namespace keypad {
-    let x = 0
-    let y = 0
     let padnumber = [["1", "2", "3", "A"], ["4", "5", "6", "B"], ["7", "8", "9", "C"], ["*", "0", "#", "D"]]
     let matrix: number[]
 
@@ -24,6 +22,13 @@ namespace keypad {
     //%col4.fieldEditor="gridpicker" col4.fieldOptions.columns=5 col4.defl=DigitalPin.P16
     export function initialize(row1: DigitalPin, row2: DigitalPin, row3: DigitalPin, row4: DigitalPin, col1: DigitalPin, col2: DigitalPin, col3: DigitalPin, col4: DigitalPin): void {
         matrix = [row1, row2, row3, row4, col1, col2, col3, col4]
+        for (let i = 4; i < 8; i++) {
+            pins.setPull(matrix[i], PinPullMode.PullUp)
+        }
+        for (let i = 0; i < 4; i++) {
+            pins.digitalWritePin(matrix[i], 1)
+            pins.digitalWritePin(matrix[i + 4], 1)
+        }
     }
 
     /** Read what you have just pressed and return a string.  
@@ -32,17 +37,18 @@ namespace keypad {
     //%block="reading"
     //%blockId="reading_from_the_pad"
     export function reading(): string {
-        x = 0; y = 0
+        let x = 0; let y = 0
         for (let i = 0; i < 4; i++) {
-            if (pins.digitalReadPin(matrix[i]) == 1) {
-                x = i + 1
-            }
-            if (pins.digitalReadPin(matrix[i + 4]) == 1) {
-                y = i + 1
+            pins.digitalWritePin(matrix[i], 0)
+            x = i
+            for (let j = 4; j < 8; j++) {
+                if (pins.digitalReadPin(matrix[j]) == 0) {
+                    y = j - 4
+                }
             }
         }
         if (x != 0 && y != 0) {
-            return padnumber[x - 1][y - 1]
+            return padnumber[x][y]
         }
         else { return "" }
     }
