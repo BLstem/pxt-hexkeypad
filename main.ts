@@ -32,7 +32,7 @@ namespace keypad {
     }
 
     /** Read what you have just pressed and return a string.  
-     *  If keypad is not pressed, this function will return a empty string, i.e. "". 
+     *  If keypad is not pressed, this function will return an empty string, i.e. "". 
     */
     //%block="reading"
     //%blockId="reading_from_the_pad"
