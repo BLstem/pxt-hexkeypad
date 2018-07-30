@@ -5,9 +5,9 @@ namespace keypad {
     let padnumber = [["1", "2", "3", "A"], ["4", "5", "6", "B"], ["7", "8", "9", "C"], ["*", "0", "#", "D"]]
     let matrix: number[]
 
-    /** Initialize pins connected to the Hex Keypad.
+    /** Initialize pins connection to the Hex Keypad.
      *  Default pins connection is set as follow:
-     *  P1, P2, P6, P9, P10, P12, P15, P16. 
+     *  P1, P2, P6, P9, P10, P12, P15, P16.
      *  You can change pins connection as you want.
     */
     //%block="Initialize row 1 %row1|row 2 %row2|row 3 %row3|row 4 %row4|col 1 %col1|col 2 %col2|col 3 %col3|col 4 %col4"
