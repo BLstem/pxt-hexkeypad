@@ -1,12 +1,14 @@
+/** Developed by BL Contents Team */
+
 //%color=#DF0174 icon="\uf11c" block="KeyPad"
 namespace keypad {
     let padnumber = [["1", "2", "3", "A"], ["4", "5", "6", "B"], ["7", "8", "9", "C"], ["*", "0", "#", "D"]]
     let matrix: number[]
 
-    /** Initialize pins connected to the Hex Keypad. 
-     *  Default pins connection is set as follow: 
+    /** Initialize pins connected to the Hex Keypad.
+     *  Default pins connection is set as follow:
      *  P1, P2, P6, P9, P10, P12, P15, P16. 
-     *  You can change pins connection as you want. 
+     *  You can change pins connection as you want.
     */
     //%block="Initialize row 1 %row1|row 2 %row2|row 3 %row3|row 4 %row4|col 1 %col1|col 2 %col2|col 3 %col3|col 4 %col4"
     //%blockId=initialize_key_pad
@@ -31,8 +33,8 @@ namespace keypad {
         }
     }
 
-    /** Read what you have just pressed and return a string.  
-     *  If keypad is not pressed, this function will return an empty string, i.e. "". 
+    /** Read what you have just pressed and return a string.
+     *  If keypad is not pressed, this function will return an empty string, i.e. "".
     */
     //%block="reading"
     //%blockId="reading_from_the_pad"
